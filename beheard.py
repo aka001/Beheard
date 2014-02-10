@@ -345,6 +345,21 @@ class liked3(webapp2.RequestHandler):
 			obj.flag=1
 			obj.put()
 		self.redirect("/comp_follow")
+class liked4(webapp2.RequestHandler):
+	def get(self,ky):
+		self.redirect("/viewit/"+ky)
+	def post(self,ky):
+		user=users.get_current_user()
+		x=like.all().filter('user =',str(user.email())).filter('cid =',str(ky))
+		if x.count()==0:
+			var=like(cid=str(ky),user=str(user.email()),flag=1)
+			var.put()
+		else:
+			k=x[0].key()
+			obj=like.get(k)
+			obj.flag=1
+			obj.put()
+		self.redirect("/viewit/"+ky)
 class followit(webapp2.RequestHandler):
 	def get(self,ky):
 		self.redirect("/allcomplain")
@@ -427,11 +442,6 @@ class followit2(webapp2.RequestHandler):
 			if str(i.key())==str(ky):
 				obj=i
 				break
-#rst=recipient.all().filter("ruser =", user)
-#		rbgroup=rst[0].bgroup
-#		don=donor.all().filter("bgroup =",rbgroup)
-#		for i in don:
-#to_addr = self.request.get("friend_email")
 		to_addr1=user.email()
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
@@ -465,11 +475,6 @@ class followit3(webapp2.RequestHandler):
 			if str(i.key())==str(ky):
 				obj=i
 				break
-#rst=recipient.all().filter("ruser =", user)
-#		rbgroup=rst[0].bgroup
-#		don=donor.all().filter("bgroup =",rbgroup)
-#		for i in don:
-#to_addr = self.request.get("friend_email")
 		to_addr1=user.email()
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
@@ -492,6 +497,39 @@ class followit3(webapp2.RequestHandler):
 			obj.status=1
 			obj.put()
 		self.redirect("/comp_follow")
+class followit4(webapp2.RequestHandler):
+	def get(self,ky):
+		self.redirect("/viewit/"+ky)
+	def post(self,ky):
+		user=users.get_current_user()
+		x=follow.all().filter('fuser =',str(user.email())).filter('fcomp =',str(ky))
+		st=complain.all()
+		for i in st:
+			if str(i.key())==str(ky):
+				obj=i
+				break
+		to_addr1=user.email()
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = to_addr1
+		message.body = """you are following the complaint %s""" % obj.desc
+		message.send()
+
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = obj.cuser.email()
+		message.body = """The complaint has been followed by %s""" % user.email()
+		message.send()
+
+		if x.count()==0:
+			var=follow(fcomp=str(ky),fuser=str(user.email()),status=1)
+			var.put()
+		else:
+			k=x[0].key()
+			obj=follow.get(k)
+			obj.status=1
+			obj.put()
+		self.redirect("/viewit/"+ky)
 class unfollowit(webapp2.RequestHandler):
 	def get(self,ky):
 		self.redirect("/allcomplain")
@@ -536,11 +574,6 @@ class unfollowit1(webapp2.RequestHandler):
 			if str(i.key())==str(ky):
 				obj=i
 				break
-#rst=recipient.all().filter("ruser =", user)
-#		rbgroup=rst[0].bgroup
-#		don=donor.all().filter("bgroup =",rbgroup)
-#		for i in don:
-#to_addr = self.request.get("friend_email")
 		to_addr1=user.email()
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
@@ -551,7 +584,7 @@ class unfollowit1(webapp2.RequestHandler):
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
 		message.to = obj.cuser.email()
-		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.name,user.email())
+		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.cname,user.email())
 		message.send()
 
 		if x.count()==0:
@@ -574,11 +607,6 @@ class unfollowit2(webapp2.RequestHandler):
 			if str(i.key())==str(ky):
 				obj=i
 				break
-#rst=recipient.all().filter("ruser =", user)
-#		rbgroup=rst[0].bgroup
-#		don=donor.all().filter("bgroup =",rbgroup)
-#		for i in don:
-#to_addr = self.request.get("friend_email")
 		to_addr1=user.email()
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
@@ -589,7 +617,7 @@ class unfollowit2(webapp2.RequestHandler):
 		self.response.write(to_addr1)
 		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
 		message.to = obj.cuser.email()
-		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.name,user.email())
+		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.cname,user.email())
 		message.send()
 
 		if x.count()==0:
@@ -607,6 +635,23 @@ class unfollowit3(webapp2.RequestHandler):
 	def post(self,ky):
 		user=users.get_current_user()
 		x=follow.all().filter('fuser =',str(user.email())).filter('fcomp =',str(ky))
+		st=complain.all()
+		for i in st:
+			if str(i.key())==str(ky):
+				obj=i
+				break
+		to_addr1=user.email()
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = to_addr1
+		message.body = """you are following the complaint %s""" % obj.desc
+		message.send()
+
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = obj.cuser.email()
+		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.cname,user.email())
+		message.send()
 		if x.count()==0:
 			var=follow(fcomp=str(ky),fuser=str(user.email()),status=2)
 			var.put()
@@ -616,6 +661,38 @@ class unfollowit3(webapp2.RequestHandler):
 			obj.status=2
 			obj.put()
 		self.redirect("/comp_follow")
+class unfollowit4(webapp2.RequestHandler):
+	def get(self,ky):
+		self.redirect("/viewit/"+ky)
+	def post(self,ky):
+		user=users.get_current_user()
+		x=follow.all().filter('fuser =',str(user.email())).filter('fcomp =',str(ky))
+		st=complain.all()
+		for i in st:
+			if str(i.key())==str(ky):
+				obj=i
+				break
+		to_addr1=user.email()
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = to_addr1
+		message.body = """you are following the complaint %s""" % obj.desc
+		message.send()
+
+		self.response.write(to_addr1)
+		message = mail.EmailMessage(sender="Akash Agrawall <akash.wanted@gmail.com>",subject="Beheard")
+		message.to = obj.cuser.email()
+		message.body = """your complaint with title %s has been unfollowed by %s""" %(obj.cname,user.email())
+		message.send()
+		if x.count()==0:
+			var=follow(fcomp=str(ky),fuser=str(user.email()),status=2)
+			var.put()
+		else:
+			k=x[0].key()
+			obj=follow.get(k)
+			obj.status=2
+			obj.put()
+		self.redirect("/viewit/"+ky)
 class complain_accepted(webapp2.RequestHandler):
 	def get(self):
 		user=users.get_current_user()
@@ -637,7 +714,24 @@ class viewit(webapp2.RequestHandler):
 				if str(i.key())==str(ky):
 					obj=i
 					break
-	    		template_values={'obj':obj, 'cntlike':cntlike, 'commentit':commentit}
+
+			folfilter=follow.all().filter('fuser =',str(user.email())).filter('fcomp =',str(obj.key()))
+			if folfilter.count()>0:
+				if folfilter[0].status==1:
+					followit=1
+				else:
+					followit=2
+			else:
+				followit=2
+			y=like.all().filter('cid =',str(obj.key())).filter('flag =',1)
+			x=like.all().filter('user =',str(user.email())).filter('cid =',str(obj.key()))
+			numberit=[]
+			numberit.append(y.count())
+			if x.count()!=0 and x[0].flag == 1:
+				likeit=1
+			else:
+				likeit=2
+	    		template_values={'obj':obj, 'cntlike':cntlike, 'commentit':commentit, 'likeit':likeit, 'followit':followit, 'numberit':numberit}
 	    		template=JINJA_ENVIRONMENT.get_template('html/viewit.html')
 			self.response.write(template.render(template_values))
 		else:
@@ -714,6 +808,21 @@ class dislike3(webapp2.RequestHandler):
 			obj.flag=2
 			obj.put()
 		self.redirect("/comp_follow")
+class dislike4(webapp2.RequestHandler):
+	def get(self,ky):
+		self.redirect("/viewit/"+ky)
+	def post(self,ky):
+		user=users.get_current_user()
+		x=like.all().filter('user =',str(user.email())).filter('cid =',str(ky))
+		if x.count()==0:
+			var=like(cid=str(ky),user=str(user.email()),flag=2)
+			var.put()
+		else:
+			k=x[0].key()
+			obj=like.get(k)
+			obj.flag=2
+			obj.put()
+		self.redirect("/viewit/"+ky)
 class complainit(webapp2.RequestHandler):
 	def get(self):
 		flag=0
@@ -1792,19 +1901,23 @@ application=webapp2.WSGIApplication([
 			("/liked1/(\S+)",liked1),
 			("/liked2/(\S+)/(\S+)",liked2),
 			("/liked3/(\S+)",liked3),
+			("/liked4/(\S+)",liked4),
 			("/followit/(\S+)",followit),
 			("/followit1/(\S+)",followit1),
 			("/followit2/(\S+)",followit2),
 			("/followit3/(\S+)",followit3),
+			("/followit4/(\S+)",followit4),
 			("/unfollowit/(\S+)",unfollowit),
 			("/unfollowit1/(\S+)",unfollowit1),
 			("/unfollowit2/(\S+)",unfollowit2),
 			("/unfollowit3/(\S+)",unfollowit3),
+			("/unfollowit4/(\S+)",unfollowit4),
 			("/viewit/(\S+)",viewit),
 			("/dislike/(\S+)",dislike),
 			("/dislike1/(\S+)",dislike1),
 			("/dislike2/(\S+)/(\S+)",dislike2),
 			("/dislike3/(\S+)",dislike3),
+			("/dislike4/(\S+)",dislike4),
 			("/mycomplain",mycomplain),
 			("/allcomplain",allcomplain),
 			("/category/(\S+)",category),

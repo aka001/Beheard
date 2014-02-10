@@ -104,6 +104,9 @@
         <nav id="menu">
 		
         	<ul id="menu-nav">
+	
+            	<li class="current"><a href="#about">Home</a></li>
+                
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
 

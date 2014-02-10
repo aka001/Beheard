@@ -464,6 +464,7 @@ function handleNoGeolocation(errorFlag) {
     text-transform: uppercase;
     transition: background 0.3s ease-in-out 0s;
     width: 140px;" class="btn btn-primary">Click Here</a>
+
 	<h1 class="title" style="color:#53201f;">Post Your Complaint</h1>
 		<div class="map" id="map-canvas"><iframe width="630" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?ll=40.967132,29.07403&amp;spn=0.047894,0.132093&amp;vpsrc=6&amp;t=m&amp;z=14&amp;output=embed"></iframe></div>
 <div class="form-container">
@@ -547,13 +548,6 @@ $('#address').keypress(function() {
     								<option value="Transportation">Transportation</option>
     								<option value="Telecom">Telecom</option>
     								<option value="Sanitation">Sanitation</option>
-    								<option value="Recreational">Recreational Facility</option>
-    								<option value="CivicAdministration">Civic Administration</option>
-    								<option value="Judicial">Judicial</option>
-    								<option value="Police">Police</option>
-    								<option value="Municipality">Municipality</option>
-    								<option value="HealthAndMedicine">Health and Medicine</option>
-    								<option value="Food">Food</option>
     							</select>
     						</div>
     					</div>
@@ -750,13 +744,6 @@ $('#address').keypress(function() {
     								<option value="Transportation">Transportation</option>
     								<option value="Telecom">Telecom</option>
     								<option value="Sanitation">Sanitation</option>
-    								<option value="Recreational">Recreational Facility</option>
-    								<option value="CivicAdministration">Civic Administration</option>
-    								<option value="Judicial">Judicial</option>
-    								<option value="Police">Police</option>
-    								<option value="Municipality">Municipality</option>
-    								<option value="HealthAndMedicine">Health and Medicine</option>
-    								<option value="Food">Food</option>
     							</select>
     						</div>
     					</div>

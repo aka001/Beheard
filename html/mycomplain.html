@@ -102,12 +102,12 @@
 						
 							{% if likeit[loop.index-1] == 1 %}		
 							<form method="post" action="/dislike1/{{i.key()}}"> 
-								<button type="submit">Liked</button>
+								<button type="submit">Supported</button>
 							</form>
 							{% else %}
 							
 							<form method="post" action="/liked1/{{i.key()}}"> 
-								<button type="submit">Like</button>
+								<button type="submit">Support</button>
 							</form>
 							{% endif %}
 						</td>	
@@ -126,9 +126,9 @@
 						</tr>
 						<tr><td>	<ul class="social_buttons thumbsocial social-icons-footer-bottom">
 				<table> <tr><td>
-								<li class="gplus"><a target="_blank" data-toggle="tooltip" title="Share on Google+" data-placement="top" href="https://plus.google.com/share?url=localhost:8090/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-google-plus"></i></a></li></td>
-																       							<td><li class="facebook"><a target="_blank" data-toggle="tooltip" title="Share on Facebook" data-placement="top" href="http://www.facebook.com/sharer.php?u=localhost:8090/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-facebook"></i> </a></li></td>
-																									       							                      <td> <li class="twitter"><a  target="_blank" data-toggle="tooltip" title="Share on Twitter" data-placement="top" href="http://twitter.com/share?url=localhost:8090/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-twitter"></i></a></li></td></tr>	
+								<li class="gplus"><a target="_blank" data-toggle="tooltip" title="Share on Google+" data-placement="top" href="https://plus.google.com/share?url=http://test-ak5.appspot.com/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-google-plus"></i></a></li></td>
+																       							<td><li class="facebook"><a target="_blank" data-toggle="tooltip" title="Share on Facebook" data-placement="top" href="http://www.facebook.com/sharer.php?u=http://test-ak5.appspot.com/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-facebook"></i> </a></li></td>
+																									       							                      <td> <li class="twitter"><a  target="_blank" data-toggle="tooltip" title="Share on Twitter" data-placement="top" href="http://twitter.com/share?url=http://test-ak5.appspot.com/viewit/{{i.key()}}" catid="5187135082594304" style="cursor: pointer;" ><i class="fa fa-twitter"></i></a></li></td></tr>	
 </table>
 																																		       							                    </ul>
 						</td></tr>

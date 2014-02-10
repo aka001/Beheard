@@ -82,11 +82,11 @@
 		{{obj.contact}}<br/>
 		{% if likeit == 1 %}		
 			<form method="post" action="/dislike4/{{obj.key()}}"> 
-				<button type="submit">Supported</button>
+				<button type="submit">Liked</button>
 			</form>
 		{% else %}	
 			<form method="post" action="/liked4/{{obj.key()}}"> 
-				<button type="submit">Support</button>
+				<button type="submit">Like</button>
 			</form>
 		{% endif %}
 		{% if followit == 1 %}

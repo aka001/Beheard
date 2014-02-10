@@ -35,7 +35,7 @@
 						<header>
 							<h1 style="color:#53201f"><a href="#" id="logo">BeHeard</a></h1>
 							<hr />
-							<span style="color:#53201f" class="byline">Raise Your voice !!</span>
+							<span style="color:#53201f" class="byline">Force the government to hear you !!</span>
 						</header>
 						<footer>
 							<a href="#banner" class="button circled scrolly">Start</a>
@@ -90,7 +90,7 @@
 						<table>
 						
 												
-							<a href="/viewit/{{i.key()}}"><img src='imagehandler2?key={{i.key()}}' alt="Complaint Image" style="height:300px; width:300px;padding:8px"></img></a>
+							<a href="/viewit/{{i.key()}}"><img src='imagehandler2?key={{i.key()}}' alt="ProfilePic" style="height:60%; width:80%;padding:8px"></img></a>
 						
 						<tr>
 						<td>
@@ -110,12 +110,12 @@
 						
 							{% if likeit[loop.index-1] == 1 %}		
 							<form method="post" action="/dislike/{{i.key()}}"> 
-								<button type="submit">Supported</button>
+								<button type="submit">Liked</button>
 							</form>
 							{% else %}
 							
 							<form method="post" action="/liked/{{i.key()}}"> 
-								<button type="submit">Support</button>
+								<button type="submit">Like</button>
 							</form>
 							{% endif %}
 						</td>	
@@ -148,6 +148,7 @@
 				</div>
 			</div>
 			
+		</div>
 
 	</body>
 </html>

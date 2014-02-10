@@ -1,4 +1,4 @@
-	<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Helios 1.5 by HTML5 UP
 	html5up.net | @n33co
@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>BeHeard</title>
+		<title>BeHeard - AllComplaints</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -17,6 +17,7 @@
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-panels.min.js"></script>
 		<script src="/js/init.js"></script>
+		
 		<noscript>
 			<link rel="stylesheet" href="/css/skel-noscript.css" />
 			<link rel="stylesheet" href="/css/style.css" />
@@ -24,22 +25,19 @@
 			<link rel="stylesheet" href="/css/style-noscript.css" />
 		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+		
+		
 	</head>
-	<body class="homepage">
+	<body class="left-sidebar">
 
 		<!-- Header -->
 			<div id="header">
-						
+
 				<!-- Inner -->
 					<div class="inner">
 						<header>
-							<h1 style="color:#53201f"><a href="#" id="logo">BeHeard</a></h1>
-							<hr />
-							<span style="color:#53201f" class="byline">Raise Your voice !!</span>
+							<h1><a href="#" id="logo">All Complaints</a></h1>
 						</header>
-						<footer>
-							<a href="#banner" class="button circled scrolly">Start</a>
-						</footer>
 					</div>
 				
 				<!-- Nav -->
@@ -69,33 +67,27 @@
 
 			</div>
 			
-		<!-- Banner -->
-			<div id="banner">
-				<h2>Hi. You're looking at <strong>BEHEARD</strong>.</h2>
-				<span class="byline">
-					An online complaint and grievance sharing app 
-					<br/>
-					built using<a href="http://html5up.net/">HTML5 UP</a>.
-					Built on <a href="http://developers.google.com/appengine">GoogleAppEngine</a>. 
-				</span>
-			</div>
+		<!-- Main -->
+						
+			
+			<div class="wrapper style1">
 
-		<!-- Carousel -->
-			<div class="carousel">
-				<div class="reel">
+
+					<div class="container">
+					<div class="row">
 					
-{% for i in  result %}
+					{% for i in  result %}
 						
 						<article class="4u special">
 						<table>
 						
 												
-							<a href="/viewit/{{i.key()}}"><img src='imagehandler2?key={{i.key()}}' alt="Complaint Image" style="height:300px; width:300px;padding:8px"></img></a>
+							<a href="/viewit/{{i.key()}}"><img src='imagehandler2?key={{i.key()}}' alt="ProfilePic" style="height:300px; width:400px"></img></a>
 						
 						<tr>
 						<td>
 							<header>
-								<h3><a href="/viewit/{{i.key()}}">{{i.cname}}</a></h3>
+								<h3><a href="#">{{i.cname}}</a></h3>
 							</header>
 						
 						</td>
@@ -110,12 +102,12 @@
 						
 							{% if likeit[loop.index-1] == 1 %}		
 							<form method="post" action="/dislike/{{i.key()}}"> 
-								<button type="submit">Supported</button>
+								<button type="submit">Liked</button>
 							</form>
 							{% else %}
 							
 							<form method="post" action="/liked/{{i.key()}}"> 
-								<button type="submit">Support</button>
+								<button type="submit">Like</button>
 							</form>
 							{% endif %}
 						</td>	
@@ -123,7 +115,7 @@
 						<td>
 							{% if followit[loop.index-1] == 1 %}
 							<form method="post" action="/unfollowit/{{i.key()}}"> 
-								<button type="submit">Followed</button>
+								<button type="submit">Un-Follow</button>
 							</form>
 							{% else %}
 							<form method="post" action="/followit/{{i.key()}}"> 
@@ -144,10 +136,11 @@
 						</article>
 							
 					{% endfor %}
+					</div>
 					
+					</div>
 				</div>
-			</div>
-			
 
+			</div>
 	</body>
 </html>
